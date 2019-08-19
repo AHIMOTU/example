@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #wrap {
+      width: 400px;
+      height: 200px;
+      margin: 200px auto;
+      border: 2px solid black;
+      display: flex;
+      background: aqua;
+    }
+    #wrap .item {
+      box-sizing: border-box;
+      flex: 0 0 25%;
+      border: 2px solid blue;
+    }
+    .red {
+      background: red;
+    }
+    .black {
+      /*background: black;*/
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <div class="item red">1</div>
+    <div class="item black">2</div>
+    <div class="item red">3</div>
+    <div class="item black">4</div>
+  </div>
+</body>
+</html>

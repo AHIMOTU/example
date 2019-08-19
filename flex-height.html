@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>flex-height</title>
+  <style>
+    #wrap {
+      display: flex;
+      flex-direction: column;
+      width: 120px;
+      height: 200px;
+      border: 1px solid red;
+    }
+    .item-top {
+      display: flex;
+      height: 30px;
+      background: green;
+    }
+    .item-bottom {
+      flex: 1;
+      /*overflow: auto;*/
+      background: pink;
+    }
+    p {
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <div class="item-top">
+      高度60，若子元素过高，则会失准
+    </div>
+    <div class="item-bottom">
+      <p>111</p>
+      <p>111</p>
+    </div>
+  </div>
+</body>
+</html>

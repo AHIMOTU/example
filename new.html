@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>new() 的实现</title>
+</head>
+<body>
+  <script>
+    window.onload = function () {
+      function Person(name, age) {
+        this.name = name
+        this.age = age
+      }
+      Person.prototype.say = function () {
+        console.log(`hello ${this.name}`)
+      }
+      // let person = new Person('张湘', '23')
+      let person = factory(Person, '张湘', '23')
+      console.log(person)
+      person.say()
+      function factory() {
+        let obj = new Object() // 创建一个对象
+        let constructor = [].shift.call(arguments)
+        obj.__proto__ = constructor.prototype // 让obj可以访问到构造函数的原型
+        let re = constructor.apply(obj, arguments) // 利用经典继承，让obj可以访问到构造函数的属性
+        return typeof re === 'object' ? re : obj
+      }
+    }
+  </script>
+</body>
+</html>

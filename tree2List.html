@@ -1,0 +1,43 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<script>
+  window.onload = function () {
+    // 数组转树
+    function list2Tree(source, parentId = 'pid', parentVal = 0, id = 'id') {
+      let target = source.filter(s => s[parentId] === parentVal)
+      target.forEach(t => {
+        let children = list2Tree(source, parentId, t[id], id)
+        if (children.length) {
+          t.children = children
+        }
+      })
+      return target
+    }
+    // 树转数组
+    let re = []
+    function tree2Lst(source, re) {
+      source.forEach(s => {
+        re.push(s)
+        if (s.children) {
+          tree2Lst(s.children, re)
+          delete s.children
+        }
+      })
+    }
+    const tree = [{ id: 1, value: '河南', children: [{id: 2, value: '南阳'}] }]
+    const list = [{ id: 1, value: '河南', pid: 0 }, { id: 2, value: '南阳', pid: 1 }]
+    console.log(list2Tree(list))
+    tree2Lst(tree, re)
+    console.log(re)
+  }
+</script>
+</body>
+</html>

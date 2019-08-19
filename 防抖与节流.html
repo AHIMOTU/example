@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>防抖与节流</title>
+  <style>
+    body, div {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #ccc;
+    }
+    #wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .search {
+      width: 300px;
+      height: 30px;
+      margin: 10px auto;
+    }
+    .item {
+      width: 400px;
+      height: 100px;
+      margin: 10px auto;
+      background: #fff;
+    }
+    #back-top {
+      position: fixed;
+      right: 50px;
+      bottom: 50px;
+      width: 50px;
+      height: 50px;
+      line-height: 25px;
+      text-align: center;
+      background: pink;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <input class="search" placeholder="请输入">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+    <div class="item">7</div>
+    <div class="item">8</div>
+    <div class="item">9</div>
+    <div class="item">10</div>
+  </div>
+  <div id="back-top">返回顶部</div>
+  <script>
+    window.onscroll = throttle(backTop, 1000, 1)
+    function backTop() {
+      let scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+      console.log(scrollTop)
+    }
+    let backTopEle = document.getElementById('back-top')
+    backTopEle.onclick = function () {
+      document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
+    }
+    let searchEle = document.getElementsByClassName('search')[0]
+    searchEle.onkeydown = debounce(onSearch, 500, false)
+    function onSearch() {
+      console.log(searchEle.value)
+    }
+    /**
+     * 防抖
+     * @param fn
+     * @param delay
+     * @return {Function}
+     */
+    function debounce(fn, delay, immediate) {
+      let timer = null
+      return function () {
+        if (timer) clearTimeout(timer)
+
+        if (immediate) {
+          let callNow = !timer
+          timer = setTimeout(() => {
+            timer = null
+          }, delay)
+          if (callNow) fn()
+        } else {
+          timer = setTimeout(() => {
+            fn()
+          }, delay)
+        }
+      }
+    }
+
+    /**
+     * 节流
+     * @param fn
+     * @param delay
+     * @param type 0 时间戳 1 定时器
+     * @return {Function}
+     */
+    function throttle(fn, delay, type) {
+      let pro = 0
+      let timer
+
+      return function () {
+        if (type === 0) {
+          let now = Date.now()
+          if (now - pro > delay) {
+            fn()
+            pro = Date.now()
+          }
+        } else if (type === 1) {
+          if (!timer) {
+            timer = setTimeout(() => {
+              timer = null
+              fn()
+            }, delay)
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
