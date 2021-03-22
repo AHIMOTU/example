@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body,div {
+      margin: 0;
+      padding: 0;
+    }
+    #wrap {
+      height: 300px;
+      width: 300px;
+      border: 5px solid black;
+      /*padding: 10px;*/
+      margin: 10px;
+      background: #fff;
+      overflow: auto;
+    }
+    ul {
+      margin-top: 0;
+      position: relative;
+      list-style: none;
+      width: 120%;
+      padding-left: 0;
+      color: #606266;
+      font-size: 14px;
+    }
+    ul li {
+      position: relative;
+      padding: 5px 10px;
+    }
+    ul li:after {
+      content: '>';
+      color: #bfcbd9;
+      font-size: 14px;
+      position: absolute;
+      right: 15px;
+    }
+    ul li:hover {
+      background: #F5F7FA;
+    }
+    .active {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <ul>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+      <li><span>广州</span></li>
+    </ul>
+  </div>
+  <script>
+    window.onload = function () {
+      let wrap = document.getElementById('wrap')
+      let targetLi = wrap.getElementsByTagName('li')[20]
+      console.log(targetLi.offsetTop)
+      targetLi.classList.add('active')
+      wrap.scrollTop = targetLi.offsetTop
+      console.log(wrap.offsetParent)
+      console.log('offsetTop' + wrap.offsetTop)
+      console.log('offsetHeight' + wrap.offsetHeight)
+      console.log('clientHeight' + wrap.clientHeight)
+      wrap.onscroll = function (e) {
+        console.log(wrap.scrollTop)
+      }
+    }
+  </script>
+</body>
+</html>

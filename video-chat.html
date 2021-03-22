@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Basic Communication</title>
+		<link rel="stylesheet" href="css/common.css" />
+		<style>
+			button{
+				    height: 50px;
+				    background: #125658;
+				    color: white;
+				    margin: 10px;
+				    width: 300px;
+			}
+		</style>
+	</head>
+	<body class="agora-theme">
+		<div>
+			<div class="input-field">
+				<label for="channel" class="active">房间号</label>
+				<input id="channel" type="text" placeholder="channel" name="channel">
+			</div>
+			<button id="click">加入房间</button>
+			<button id="leave">退出房间</button>
+		</div>
+		<form id="form" class="row col l12 s12">
+			<div class="row container col l12 s12">
+				<div class="col s7">
+					<div class="video-grid" id="video">
+						<div class="video-view">
+							<div id="local_stream" class="video-placeholder"></div>
+							<div id="local_video_info" class="video-profile hide"></div>
+							<div id="video_autoplay_local" class="autoplay-fallback hide"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/materialize.min.js"></script>
+		<script src="js/AgoraRTCSDK-3.0.2.js"></script>
+		<!-- <script src="https://cdn.agora.io/sdk/release/AgoraRTCSDK-3.0.2.js"></script> -->
+		<script>
+			// rtc object
+			var rtc = {
+				client: null,
+				joined: false,
+				published: false,
+				localStream: null,
+				remoteStreams: [],
+				params: {}
+			};
+			// Options for joining a channel
+			var option = {
+				// appID: "cabe159bc2c34d1c8e482002b2984a62",
+				appID: "f3e743e62ce94303b12cb46d0b81c97a",
+				channel: "",
+				// channel: "shuanghou",
+				uid: null,
+				// token:$("#token").val()
+				token: "006f3e743e62ce94303b12cb46d0b81c97aIABpYN2+3wPUR6mO2JAlhC6jlIr1zf+7GobjG4fDmjAFJDnhFfUAAAAAEAALV6bzGN2fXgEAAQAX3Z9e"
+			}
+			// 加入频道前，我们需要先创建并初始化一个客户端对象。
+			// Create a client
+			rtc.client = AgoraRTC.createClient({
+				mode: "rtc",
+				codec: "h264"
+			});
+			// Initialize the client
+			rtc.client.init(option.appID)
+			// 在 Client.init 的 onSuccess 回调中调用 Client.join 加入频道。
+			$("#click").click(function() {
+				// debugger
+				option.channel = $("#channel").val();
+				// Join a channel
+				rtc.client.join(option.token ? option.token : null, option.channel, option.uid ? +option.uid : null, function(uid) {
+					console.log("join channel: " + option.channel + " success, uid: " + uid);
+					rtc.params.uid = uid;
+					alert("加入成功")
+					// 发布本地流 Create a local stream
+					rtc.localStream = AgoraRTC.createStream({
+						streamID: rtc.params.uid,
+						audio: true,
+						video: true,
+						screen: false,
+					})
+					// 调用 Stream.init 方法初始化创建的流 Initialize the local stream
+					rtc.localStream.init(function() {
+						// console.log("init local stream success");
+						// play stream with html element id "local_stream"
+						rtc.localStream.play("local_stream");
+						// 在 Stream.init 的 onSuccess 回调中调用 Client.publish 方法，发布本地流
+						// Publish the local stream
+						rtc.client.publish(rtc.localStream, function (err) {
+						  console.log("publish failed");
+						  console.error(err);
+						})
+					}, function(err) {
+						console.error("init local stream failed ", err);
+					});
+				}, function(err) {
+					alert("进入失败")
+					console.error("client join failed", err)
+				})
+			});
+
+			rtc.client.on("stream-added", function(evt) {
+				var remoteStream = evt.stream;
+				var id = remoteStream.getId();
+				if (id !== rtc.params.uid) {
+					rtc.client.subscribe(remoteStream, function(err) {
+						console.log("stream subscribe failed", err);
+					})
+				}
+				console.log('stream-added remote-uid: ', id);
+			});
+			rtc.client.on("stream-subscribed", function(evt) {
+				var remoteStream = evt.stream;
+				var id = remoteStream.getId();
+				// Add a view for the remote stream.
+				addView(id);
+				// Play the remote stream.
+				remoteStream.play("remote_video_" + id);
+				console.log('stream-subscribed remote-uid: ', id);
+			})
+			rtc.client.on("stream-removed", function(evt) {
+				var remoteStream = evt.stream;
+				var id = remoteStream.getId();
+				// Stop playing the remote stream.
+				remoteStream.stop("remote_video_" + id);
+				// Remove the view of the remote stream. 
+				removeView(id);
+				console.log('stream-removed remote-uid: ', id);
+			})
+			// 收到远程流的通知
+			rtc.client.on("peer-leave", function(evt) {
+				var id = evt.uid;
+				console.log("id", evt);
+				if (id != rtc.params.uid) {
+					removeView(id);
+				}
+				console.log('peer-leave', id);
+			})
+			// Occurs when the local stream is published.
+			rtc.client.on("stream-published", function(evt) {
+				console.log("stream-published");
+			})
+			// 移除窗口
+			function removeView(id) {
+				if ($("#remote_video_panel_" + id)[0]) {
+					$("#remote_video_panel_" + id).remove();
+				}
+			}
+		
+			// 加入流窗口
+			function addView(id, show) {
+				if (!$("#" + id)[0]) {
+					$("<div/>", {
+						id: "remote_video_panel_" + id,
+						class: "video-view",
+					}).appendTo("#video");
+
+					$("<div/>", {
+						id: "remote_video_" + id,
+						class: "video-placeholder",
+					}).appendTo("#remote_video_panel_" + id);
+
+					$("<div/>", {
+						id: "remote_video_info_" + id,
+						class: "video-profile " + (show ? "" : "hide"),
+					}).appendTo("#remote_video_panel_" + id);
+
+					$("<div/>", {
+						id: "video_autoplay_" + id,
+						class: "autoplay-fallback hide",
+					}).appendTo("#remote_video_panel_" + id);
+				}
+			}
+			// 离开房间
+			$("#leave").click(function() {
+				// Leave the channel
+				rtc.client.leave(function() {
+					// Stop playing the local stream
+					rtc.localStream.stop();
+					// Close the local stream
+					rtc.localStream.close();
+					// Stop playing the remote streams and remove the views
+					while (rtc.remoteStreams.length > 0) {
+						var stream = rtc.remoteStreams.shift();
+						var id = stream.getId();
+						stream.stop();
+						removeView(id);
+					}
+					console.log("client leaves channel success");
+				}, function(err) {
+					console.log("channel leave failed");
+					console.error(err);
+				})
+			})
+		</script>
+	</body>
+</html>

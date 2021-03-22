@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .parent {
+            overflow: hidden;
+            background: #e7a1c5;
+        }
+        .parent .child {
+            height: 100px;
+            margin-top: 10px;
+            margin-left: 10px;
+            background: #c8cdf5;
+        }
+        .parent2 {
+            overflow: hidden;
+            background: #e7a1c5;
+        }
+        .parent2 .child2 {
+            height: 100px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            background: #c8cdf5;
+        }
+        .parent3 {
+            overflow: hidden;
+            background: #e7a1c5;
+        }
+        .parent3 p {
+            margin: 20px auto 30px;
+            background: #c8cdf5;
+        }
+        .parent4 {
+            overflow: hidden;
+            margin: 20px auto 30px;
+        }
+        .parent5 {
+            overflow: hidden;
+            height: 50px;
+            background: #e7a1c5;
+        }
+    </style>
+</head>
+<body>
+    <section class="parent">
+        <article class="child">块元素的margin-top/bottom与它的第一个/最后一个子元素的margin-top/bottom，子元素多余的外边距会被父元素的外边距截断</article>
+    </section>
+    <hr>
+    <section class="parent2">
+        <article class="child2">块元素的margin-top/bottom与它的第一个/最后一个子元素的margin-top/bottom，子元素多余的外边距会被父元素的外边距截断</article>
+    </section>
+    <hr>
+    <section class="parent3">
+        <p>1</p>
+        <div style="overflow: hidden;"><p>2兄弟元素的边界重叠</p></div>
+        <!-- <p>2</p> -->
+        <p>3</p>
+    </section>
+    <div class="parent4"></div>
+    <div class="parent5"></div>
+</body>
+</html>

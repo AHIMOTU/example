@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>tab切换</title>
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+  <style>
+    #title {
+      display: flex;
+    }
+    .tab {
+      width: 80px;
+      height: 30px;
+      border-top: 1px solid deepskyblue;
+      border-bottom: 1px solid deepskyblue;
+      border-left: 1px solid deepskyblue;
+      text-align: center;
+      line-height: 30px;
+      color: deepskyblue;
+      cursor: pointer;
+    }
+    .tab:last-child {
+      border-right: 1px solid deepskyblue;
+    }
+    .active {
+      background: deepskyblue;
+      color: #fff;
+    }
+    .content {
+      width: 100%;
+      height: 400px;
+      margin-top: 10px;
+      border: 1px solid deepskyblue;
+      display: none;
+    }
+    .show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div id="title">
+      <div class="tab active">并发统计</div>
+      <div class="tab">在线统计</div>
+    </div>
+    <div class="content show"><strong>并发</strong>统计内容......</div>
+    <div class="content "><strong>在线</strong>统计内容......</div>
+  </div>
+  <script>
+    $(document).ready(function(){
+      $('.tab').click(function(){
+        $('.tab').removeClass('active')
+        $('.content').removeClass('show')
+        $(this).addClass('active')
+        console.log($(this))
+        $('.content').eq($(this).index()).addClass('show')
+      })
+    })
+  </script>
+</body>
+</html>

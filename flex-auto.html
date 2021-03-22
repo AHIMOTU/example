@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #parent {
+      display: flex;
+    }
+    .left {
+      width: 260px;
+    }
+    #wrap {
+      flex: 1;
+      display: flex;
+      height: 300px;
+      border: 1px solid #ccc;
+    }
+    .item1 {
+      width: 200px;
+      background: rebeccapurple;
+    }
+    .item2 {
+      width: 250px;
+      background: seagreen;
+    }
+    .item3 {
+      flex: 1;
+      background: deeppink;
+    }
+  </style>
+</head>
+<body>
+  <div id="parent">
+    <div class="left"></div>
+    <div id="wrap">
+      <div class="item1"></div>
+      <div class="item2"></div>
+      <div class="item3"></div>
+    </div>
+  </div>
+  <button class="btn">toggle</button>
+  <script>
+    window.onload = function () {
+      let btn = document.getElementsByClassName('btn')[0]
+      let left = document.getElementsByClassName('left')[0]
+      let hidden = true
+      btn.onclick = function () {
+        left.style.display = hidden ? 'none' : 'block'
+        hidden = !hidden
+      }
+    }
+  </script>
+</body>
+</html>

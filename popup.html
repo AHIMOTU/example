@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <title>Document</title>
+    <style>
+        .mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0,0,0,.7);
+            opacity: 0;
+            transition: all .25s ease-in-out;
+        }
+        .popup {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            z-index: 2;
+            width: 100%;
+            height: 30%;
+            background-color: pink;
+            transition: all .3s ease-in-out;
+            transform: translateY(100%);
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">popup</button>
+    <div id="wrap" style="visibility: hidden;">
+        <div class="mask"></div>
+        <div class="popup"></div>
+    </div>
+    <script>
+        $('#btn').click(function (e) {
+            console.log('btn');
+            $('#wrap').css('visibility', 'visible')
+            $('.mask').css('opacity', 1)
+            $('.popup').css('transform', 'translateY(0)')
+        })
+        $('.mask').click(function () {
+            console.log('mask');
+            $('#wrap').css('visibility', 'hidden')
+            $('.mask').css('opacity', 0)
+            $('.popup').css('transform', 'translateY(100%)')
+        })
+    </script>
+</body>
+</html>

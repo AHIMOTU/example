@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function loadImageAsync(url) {
+            return new Promise((resolve, reject) => {
+                let image = new Image(100, 100)
+                image.onload = () => {
+                    let obj = {
+                        w: [image.naturalWidth, image.width],
+                        h: [image.naturalHeight, image.height]
+                    }
+                    resolve(obj)
+                }
+                image.onerror = () => {
+                    reject(new Error(url + ' is error'))
+                }
+                image.src = url
+                document.body.appendChild(image)
+            })
+        }
+        loadImageAsync('https://opyx-mtds-test.oss-cn-shenzhen.aliyuncs.com/GCPM/notice/e1d7b780cb9d42ac8ea0088091cc8313.jpg')
+        .then(data => {
+            console.log(data)
+        }).catch(error => {
+            console.log(error)
+        })
+    </script>
+</body>
+</html>

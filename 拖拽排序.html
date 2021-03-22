@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        const $box = document.querySelector('.box');
+        let data = ['A', 'B', 'C', 'D'];
+
+        let fragment = document.createDocumentFragment();
+        let $li = document.createElement('li');
+        const render = () => {
+            while ($box.children.length > 0) {
+                $box.removeChild($box.firstChild)
+            }
+            data.forEach((e, i) => {
+                let $cloneLi = $li.cloneNode();
+                $cloneLi.innerHTML = e;
+                $cloneLi.setAttribute('draggable', true);
+                fragment.appendChild($cloneLi);
+                $box.appendChild(fragment);
+            });
+        }
+
+        const changeData = (fromValue, toValue) => {
+            // fromIndex 原数据索引
+            let fromIndex = data.indexOf(fromValue);
+            // 删除fromIndex
+            data.splice(fromIndex, 1);
+            // toIndex(注意在删除之后取)
+            let toIndex = data.indexOf(toValue);
+            // 在toIndex后插入源数据
+            data.splice(toIndex + 1, 0, fromValue);
+        }
+
+        render();
+
+        $box.setAttribute('draggable', false);
+
+        $box.addEventListener('dragstart', e => {
+            let $currentLi = e.target;
+            e.dataTransfer.setData('content', $currentLi.innerHTML);
+        })
+
+        $box.addEventListener('dragenter', e => { e.preventDefault(); })
+
+        $box.addEventListener('dragover', e => { e.preventDefault(); })
+
+        $box.addEventListener('drop', e => {
+            let fromValue = e.dataTransfer.getData('content');
+            let toValue = e.target.innerHTML;
+            changeData(fromValue, toValue)
+            render();
+        })
+    </script>
+</body>
+</html>

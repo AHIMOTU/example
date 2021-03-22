@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--[if lte IE 8]>   
+        <script type="text/javascript" src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->  
+    <!--[if lte IE 8]>
+    <script>
+        (function(){
+            var e="abbr,article,aside,audio,canvas,datalist,details,dialog,eventsource,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(","),
+            i=e.length;
+            while(i--){document.createElement(e[i])}
+        })();
+    </script>
+    <![endif]-->  
+    <style>
+        article,aside,dialog,footer,header,section,footer,nav,figure,menu {
+            display:block
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/html/">HTML</a> |
+        <a href="/css/">CSS</a> |
+        <a href="/js/">JavaScript</a> |
+        <a href="/jquery/">jQuery</a>
+    </nav>
+    <canvas id="myCanvas" width="200" height="100" style="border:1px solid #c3c3c3;">
+        您的浏览器不支持 HTML5 canvas 标签。
+    </canvas>
+    <script>
+
+        var c=document.getElementById("myCanvas");
+        var ctx=c.getContext("2d");
+        ctx.fillStyle="#FF0000";
+        ctx.fillRect(0,0,150,75);
+        
+    </script>        
+</body>
+</html>

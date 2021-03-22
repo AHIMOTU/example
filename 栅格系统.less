@@ -1,0 +1,51 @@
+// https://github.com/zachacole/Simple-Grid/blob/master/simple-grid.scss
+@width: 96%;
+@gutter: 4%;
+
+.container {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.row {
+    width: 100%;
+
+    [class^='col'] {
+        float: left;
+        margin: 0.5rem 2%;
+    }
+
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+// http://lesscss.cn/features/#loops-feature
+.generate-cols(12);
+.generate-cols(@n, @i: 1) when (@i <= @n) {
+    .col-@{i} {
+        width: @width;
+    }
+    .generate-cols(@n, @i + 1)
+}
+
+.generate-sm-cols(12);
+.generate-sm-cols(@n, @i: 1) when (@i <= @n) {
+    .col-@{i}-sm {
+        width: @width / (@n / @i);
+    }
+    .generate-sm-cols(@n, @i + 1)
+}
+
+@media only screen and (min-width: 720px) {
+    .generate-cols(12);
+    .generate-cols(@n, @i: 1) when (@i <= @n) {
+        .col-@{i} {
+            width: @width / (@n / @i) - @gutter * (@n - @i) / @n;
+        }
+        .generate-cols(@n, @i + 1)
+    }
+}

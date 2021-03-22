@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 滚动条 */
+        ::-webkit-scrollbar {
+            width: 10px; /* 竖向滚动条时生效 */
+            height: 10px; /* 横向滚动条时生效 */
+            /* background-color: red; */
+        }
+        /* 轨道 */
+        ::-webkit-scrollbar-track {
+            background-color: #fff;
+        }
+        /* 轨道（除去滑块） */
+        /* ::-webkit-scrollbar-track-piece */
+        /* 滑块 */
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: #eee;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #ddd;
+        }
+        p {
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+</body>
+</html>

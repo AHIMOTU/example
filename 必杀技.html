@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const skills = [
+            {
+                keys: ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'],
+                cd: 10,
+                skillsCheckProgress: 0,
+                skillsLastFire: 0,
+            }
+        ]
+
+        window.onkeydown = (key) => {
+            console.log(key)
+            for (let i = 0; i < skills.length; i++) {
+                let skill = skills[i];
+                if (key.key === skill.keys[skill.skillsCheckProgress]) {
+                    skill.skillsCheckProgress++;
+                } else {
+                    skill.skillsCheckProgress = 0;
+                }
+                let now = new Date().getTime();
+                if (skill.skillsCheckProgress === skill.keys.length
+                    && (now - skill.skillsLastFire) > (skill.cd * 1000)) {
+                    skills.skillsCheckProgress = 0;
+                    skills.skillsLastFire = now;
+                    console.log('fire');
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

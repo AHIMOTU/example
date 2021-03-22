@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="input1" type="text" value="通过" disabled>
+    <input type="text" value="通过" readonly>
+    <form action="https://www.w3school.com.cn/example/html/form_action.asp" method="get">
+        <p>First name: <input type="text" name="fname" value="first" /></p>
+        <p>Last name: <input type="text" name="lname" disabled="disabled" value="last" /></p>
+        <input type="submit" value="Submit" />
+    </form>
+    <input id="pass" type="radio" disabled><label for="pass">通过</label>
+    <input id="nopass" type="radio" readonly><label for="nopass">未通过</label>
+    <script>
+        console.log(document.getElementById('input1').value)
+    </script>
+</body>
+</html>

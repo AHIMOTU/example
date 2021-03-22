@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            position: relative;
+            width: 0;
+            height: 0;
+            border-top: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 50px solid #ff0;
+            border-left: 50px solid transparent;
+            margin: 100px auto;
+        }
+        #div1::after {
+            position: absolute;
+            top: -47px;
+            left: -48px;
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 48px solid transparent;
+            border-right: 48px solid transparent;
+            border-bottom: 49px solid #fff;
+            border-left: 48px solid transparent;
+        }
+        #div2 {
+            width: 0;
+            height: 0;
+            border-top: 50px solid transparent;
+            border-right: 50px solid #ff0;
+            border-bottom: 50px solid #ff0;
+            border-left: 50px solid transparent;
+            margin: 100px auto;
+        }
+        #test {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            padding: 100px;
+            margin: auto;
+            border: 10px solid #ccc;
+            background-color: #ff0;
+        }
+        #test .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0px;
+            height: 0px;
+            border-width: 25px;
+            border-style: solid;
+            border-color: rgb(156, 94, 156);
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <br>
+    <div id="test">
+        <div class="content"></div>
+    </div>
+    <script>
+        "use strict";
+        // a = 1
+        console.log(this)
+        // console.log(a)
+    </script>
+</body>
+</html>

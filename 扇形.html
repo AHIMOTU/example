@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 例子一 */
+        #container1 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+        #container1 .main {
+            height: 100%;
+            border-radius: 50%;
+            background-color: lightgreen;
+        }
+        #container1 .mask1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            border-radius: 100px 0 0 100px;
+            background-color: red;
+            transform: rotate(83deg);
+            transform-origin: right center;
+        }
+        #container1 .mask2 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            border-radius: 0 100px 100px 0;
+            background-color: blue;
+            transform: rotate(-76deg);
+            transform-origin: left center;
+        }
+        /* 例子二 */
+        #container2 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+        #container2 .mask1 {
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            border-radius: 100px 0 0 100px;
+            background-color: red;
+        }
+        #container2 .mask2 {
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            border-radius: 100px 0 0 100px;
+            background-color: white;
+            transform-origin: right center;
+            animation: mask2 2s linear infinite;
+        }
+        @keyframes mask2 {
+            from {
+                transform: rotate(0);
+            }
+            50% {
+                transform: rotate(0);
+            }
+            to {
+                transform: rotate(180deg);
+            }
+        }
+        #container2 .mask3 {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            border-radius: 0 100px 100px 0;
+            background-color: red;
+            animation: mask3 2s linear infinite;
+        }
+        @keyframes mask3 {
+            form {
+                z-index: 1;
+            }
+            50% {
+                z-index: 1;
+            }
+            50.00000001% {
+                z-index: 2;
+            }
+            to {
+                z-index: 2;
+            }
+        }
+        #container2 .mask4 {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            border-radius: 0 100px 100px 0;
+            background-color: white;
+            transform-origin: left center;
+            animation: mask4 2s linear infinite;
+        }
+        @keyframes mask4 {
+            from {
+                transform: rotate(0);
+            }
+            50% {
+                transform: rotate(180deg);
+            }
+            to {
+                transform: rotate(180deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container1">
+        <div class="main"></div>
+        <div class="mask1"></div>
+        <div class="mask2"></div>
+    </div>
+    <div id="container2">
+        <div class="mask1"></div>
+        <div class="mask2"></div>
+        <div class="mask3"></div>
+        <div class="mask4"></div>
+    </div>
+</body>
+</html>

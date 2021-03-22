@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .clip {
+            position: absolute;
+            clip: rect(0, 0, 0, 0);
+        }
+        .btn {
+            display: inline-block;
+            line-height: 1.42858;
+            padding: 9px 15px;
+            border: 1px solid #00a5e0;
+            border-radius: 4px;
+            background-color: #00a5e0;
+            font-size: 14px;
+            color: #fff;
+            cursor: pointer;
+            transition: all .15s;
+        }
+        .btn:hover {
+            border-color: #00b4f5;
+            background-color: #00b4f5;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="file" id="targetImg" class="clip">
+        <label for="targetImg" class="btn">选择图片</label>
+        <img src="./watermark.png" alt="" id="watermarkImg" class="clip">
+        <div id="outImgWrap"></div>
+    </div>
+    <script>
+        window.onload = function () {
+            const eleTargetImg = document.getElementById('targetImg')
+            const eleWatermarkImg = document.getElementById('watermarkImg')
+            const eleOutImgWrap = document.getElementById('outImgWrap')
+            
+            eleTargetImg.addEventListener('change', (event1) => {
+                const file = event1.target.files[0]
+
+                // 将图片转成base64地址
+                const fileReader = new FileReader()
+                fileReader.readAsDataURL(file)
+                fileReader.onload = (event2) => {
+                    const base64 = event2.target.result                
+                    drawImage(base64, (outImgUrl) => {
+                        eleOutImgWrap.innerHTML = '<img src="'+ outImgUrl + '">'
+                    })
+                }
+
+                function drawImage(base64, cb) {
+                    const canvas = document.createElement('canvas')
+                    const context = canvas.getContext('2d')
+                    const outImg = new Image()
+                    outImg.crossOrigin = 'anonymous'
+                    outImg.src = base64
+                    outImg.onload = () => {
+                        context.drawImage(outImg, 0, 0, 300, 300, 0, 0, 300, 300)
+                        context.drawImage(eleWatermarkImg, 0, 0, 300, 300, 0, 0, 300, 300)
+                        const outImgUrl = canvas.toDataURL('image/png')
+                        cb && cb(outImgUrl)
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+</html>

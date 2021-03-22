@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .heart {
+            position: relative;
+            width: 100px;
+            height: 80px;
+        }
+        .heart::before {
+            position: absolute;
+            left: 0;
+            content: '';
+            width: 50px;
+            height: 80px;
+            border-radius: 25px 25px 0 0;
+            background-color: red;
+            /* 顺时针旋转 */
+            transform: rotate(45deg);
+            /* 设置旋转元素的基准点，必须与transform一同使用 */
+            transform-origin: 100% 100%;
+        }
+        .heart::after {
+            position: absolute;
+            left: 50px;
+            content: '';
+            width: 50px;
+            height: 80px;
+            border-radius: 25px 25px 0 0;
+            background-color: red;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="heart"></div>
+    <script>
+        // let newPage = window.open('..')
+        // newPage
+        // let a = document.createElement('a')
+        // a.target = '_blank'
+        // a.href = 'https://www.baidu.com'
+        // a.style.display = 'none'
+        // a.click()
+        // window.open('https://www.baidu.com')
+        // document.body.addEventListener('click', () => {
+            // window.open('https://www.baidu.com')
+            // let a = document.createElement('a')
+            // a.target = '_blank'
+            // a.href = 'https://www.baidu.com'
+            // a.style.display = 'none'
+            // a.click()
+        // })
+        // setTimeout(function () {
+        //     document.body.dispatchEvent(new Event('click'));
+        // }, 500);
+    </script>
+</body>
+</html>

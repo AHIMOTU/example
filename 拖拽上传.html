@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖拽上传</title>
+    <style>
+        .upload-dragger {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 360px;
+            height: 180px;
+            border: 1px dashed #d9d9d9;
+            border-radius: 6px;
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-dragger">
+        将文件拖到此处
+    </div>
+    <script>
+        // ondragover事件规定在何处放置被拖动的数据
+        // 默认是无法将数据/元素放置到元素中的。
+        document.addEventListener('dragover', (event) => {
+            event.preventDefault()
+        })
+        // 当放置被拖动数据时，会触发ondrop事件
+        document.addEventListener('drop', (event) => {
+            // 默认行为是以链接形式打开
+            event.preventDefault()
+            console.log(event.dataTransfer)
+        })
+    </script>
+</body>
+</html>

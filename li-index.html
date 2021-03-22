@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="test">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <script>
+        const ele = document.getElementById('test')
+        // ele.addEventListener('click', function (e) {
+        //     for (let i = 0; i < this.children.length; i++) {
+        //         if (this.children[i] == e.target) {
+        //             console.log(i)
+        //         }
+        //     }
+        // })
+        const items = ele.getElementsByTagName('li')
+        // for (let i = 0; i < items.length; i++) {
+        //     const element = items[i];
+        //     element.addEventListener('click', function (e) {
+        //         console.log(i)
+        //     })
+        // }
+        for (var i = 0; i < items.length; i++) {
+            (function (i) {
+                const element = items[i];
+                element.addEventListener('click', function (e) {
+                    console.log(i)
+                })
+            })(i)
+        }
+    </script>
+</body>
+</html>

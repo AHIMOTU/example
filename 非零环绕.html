@@ -1,0 +1,44 @@
+<!-- https://blog.csdn.net/Jianxq/article/details/78267666 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    canvas {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+<canvas width="600" height="400" id='cas'></canvas>
+
+<script>
+  // 获取元素
+  var cas = document.getElementById( "cas" );
+  // 获取绘图上下文
+  var ctx = cas.getContext( '2d' );
+
+  // 绘制镂空矩形
+  // 里面顺时针, 外面逆时针就可以实现
+
+  // 外部方形 逆时针
+  ctx.moveTo( 100, 100 )
+  ctx.lineTo( 100, 300 )
+  ctx.lineTo( 300, 300 )
+  ctx.lineTo( 300, 100 )
+  ctx.closePath();
+
+  // 内部方形 顺时针
+  ctx.moveTo( 150, 150 );
+  ctx.lineTo( 250, 150 );
+  ctx.lineTo( 250, 250 );
+  ctx.lineTo( 150, 250 );
+  ctx.closePath();
+
+  ctx.fill();
+  // ctx.stroke()
+
+</script>
+</body>
+</html>

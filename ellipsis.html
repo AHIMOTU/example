@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>省略文字</title>
+  <style>
+    #wrap {
+      width: 300px;
+      height: 400px;
+      border: 1px solid #ccc;
+    }
+    p {
+      /*单行省略*/
+      /*white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;*/
+
+      /*多行省略（使用伪类）比较丑*/
+
+      position: relative;
+      line-height: 24px;
+      height: 48px;
+      overflow: hidden;
+
+      /*多行省略（只兼容webkit内核浏览器）*/
+
+      /*display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      word-break: break-all;
+      text-overflow: ellipsis;
+      overflow: hidden;*/
+    }
+    p::after {
+      content: '...';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <p>风住尘香花已尽，日晚倦梳头。物是人非事事休，欲语泪先流。
+      闻说双溪春尚好，也拟泛轻舟。只恐双溪舴艋舟，载不动许多愁。</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #000;
+            position: relative;
+        }
+        .content {
+            width: 120px;
+            height: 120px;
+            background-color: #ff0;
+        }
+        .item1 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+        }
+        .item2 {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .flex-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .item4 {
+            float: right;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="content item1"></div>
+    </div>
+    <div class="wrap">
+        <div class="content item2"></div>
+    </div>
+    <div class="wrap flex-wrap">
+        <div class="content item2"></div>
+    </div>
+    <div class="wrap">
+        <div class="content item4"></div>
+    </div>
+    <script>
+        window.onload = function () {
+            console.log(2)
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log(1)
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .carousel {
+            overflow: hidden;
+            position: relative;
+        }
+        .carousel .carousel__container {
+            height: 200px;
+            text-align: center;
+        }
+        .carousel .carousel__container .carousel__arrow {
+            position: absolute;
+            top: 50%;
+            z-index: 10;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            outline: none;
+            font-size: 18px;
+            color: #fff;
+            background-color: rgba(31,45,61,.11);
+            cursor: pointer;
+        }
+        .carousel .carousel__container .carousel__arrow--left {
+            left: 16px;
+        }
+        .carousel .carousel__container .carousel__arrow--right {
+            right: 16px;
+        }
+        .carousel .carousel__container .carousel__item {
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            background-color: #99a9bf;
+            transition: transform .4s ease-in-out;
+        }
+        .carousel .carousel__container .carousel__item h3 {
+            font-size: 14px;
+            color: #475669;
+            line-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel">
+        <div class="carousel__container">
+            <button class="carousel__arrow carousel__arrow--left">＜</button>
+            <button class="carousel__arrow carousel__arrow--right">＞</button>
+            <div class="carousel__item">
+                <h3 class="medium">1</h3>
+            </div>
+            <div class="carousel__item">
+                <h3 class="medium">2</h3>
+            </div>
+            <div class="carousel__item">
+                <h3 class="medium">3</h3>
+            </div>
+            <div class="carousel__item">
+                <h3 class="medium">4</h3>
+            </div>
+            <div class="carousel__item">
+                <h3 class="medium">5</h3>
+            </div>
+            <div class="carousel__item">
+                <h3 class="medium">6</h3>
+            </div>
+        </div>
+        <ul class="carousel__indicators"></ul>
+    </div>
+    <script>
+        window.onload = function () {
+            const CARD_SCALE = 0.83
+
+            let activeIndex = 0
+
+            const carouselContainer = document.querySelector('.carousel__container')
+            const carouselItems = document.querySelectorAll('.carousel__item')
+
+            setStyle()
+
+            setInterval(function () {
+                if (activeIndex < carouselItems.length - 1) {
+                    activeIndex++
+                } else {
+                    activeIndex = 0
+                }
+                setStyle()
+            }, 3000)
+
+            function setStyle () {
+                carouselItems.forEach((carouselItem, index) => {
+                    index = processIndex(index, activeIndex, carouselItems.length)
+                    const translateX = calcTranslate(index, activeIndex)
+                    const scale = index === activeIndex ? 1 : CARD_SCALE
+                    if (index === activeIndex) {
+                        carouselItem.style.zIndex = activeIndex    
+                    }
+                    carouselItem.style.transform = `translateX(${translateX}px) scale(${scale})`
+                })
+            }
+
+            // loop 的情况下，改变 index, 确保动画方向一致，避免 transform 时出现空白
+            function processIndex (index, activeIndex, length) {
+                if (activeIndex === 0 && index === length - 1) {
+                    return -1;
+                } else if (activeIndex === length - 1 && index === 0) {
+                    return length;
+                } else if (index < activeIndex - 1 && activeIndex - index >= length / 2) {
+                    // 将位于 activeIndex 较前的 item, 置为最右侧；保证动画从右侧进入
+                    return length + 1;
+                } else if (index > activeIndex + 1 && index - activeIndex >= length / 2) {
+                    // 将位于 activeIndex 较后的 item, 置为最左侧；保证动画从左侧离开
+                    return -2;
+                }
+                return index;
+            }
+
+            function calcTranslate (index, activeIndex) {
+                const parentWidth = carouselContainer.offsetWidth
+                if (Math.round(Math.abs(index - activeIndex)) <= 1) {
+                    // y = -(1 - CARD_SCALE)    |    1    |    2 + (1 - CARD_SCALE)
+                    // x =          -1          |    0    |              1
+                    // y = (2 - CARD_SCALE) * x + 1
+                    // y = (2 - CARD_SCALE) * (index - activeIndex) + 1
+                    // parentWidth / 4 * ((2 - CARD_SCALE) * (index - activeIndex) + 1)
+                    return parentWidth * ((2 - CARD_SCALE) * (index - activeIndex) + 1) / 4
+                } else {
+                    if (index < activeIndex) {
+                        // 左侧非 inStage 的 item，统一移到不可见位置即可
+                        return -(1 + CARD_SCALE) * parentWidth / 4
+                    } else {
+                        // 右侧非 inStage 的 item，统一移到不可见位置即可
+                        return (3 + CARD_SCALE) * parentWidth / 4
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #myCanvas {
+            border: 1px dashed #000;
+            /* 会使画布等比例缩小 */
+            /* width: 150px; */
+        }
+    </style>
+</head>
+<body>
+    <!-- width="150px"可以带单位也可以不带，em/rem都表现出px -->
+    <!-- <canvas id="myCanvas" width="150rem"></canvas> -->
+    <!-- 默认300*150 -->
+    <canvas id="myCanvas"></canvas>
+    <script>
+        let myCanvas = document.getElementById('myCanvas')
+        // myCanvas.width = '150' // 不能带单位
+        let ctx = myCanvas.getContext('2d')
+
+        // rect()
+        cicle()
+
+        function rect () {
+            ctx.fillStyle = '#000' // 设置填充的颜色
+            ctx.fillRect(0,0,150,75) // 绘制被填充的举行
+        }
+
+        function cicle () {
+            ctx.arc(100, 75, 50, 0, 1.5 * Math.PI)
+            ctx.fill() // 填充当前路径
+            ctx.stroke() // 绘制已定义的路径
+        }
+    </script>
+</body>
+</html>

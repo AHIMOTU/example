@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #draggable {
+          width: 200px;
+          height: 20px;
+          text-align: center;
+          background: white;
+        }
+      
+        .dropzone {
+          width: 200px;
+          height: 20px;
+          background: blueviolet;
+          margin-bottom: 10px;
+          padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dropzone">
+        <div id="draggable" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
+            This div is draggable
+        </div>
+    </div>
+    <div class="dropzone"></div>
+    <div class="dropzone"></div>
+    <div class="dropzone"></div>
+    <script>
+        let draggedEle
+
+        document.addEventListener('dragstart', (event) => {
+            // 保存拖动元素的引用（ref.）
+            draggedEle = event.target
+            // 使其半透明
+            event.target.style.opacity = .5
+        }, false)
+        document.addEventListener('drag', (event) => {}, false)
+        document.addEventListener('dragend', (event) => {
+            // 重置透明度
+            event.target.style.opacity = ''
+        }, false)
+
+        document.addEventListener('dragenter', (event) => {
+            // 当可拖动元素进入可放置的目标时，高亮目标节点
+            if (event.target.className === 'dropzone') {
+                event.target.style.background = 'purple'
+            }
+        }, false)
+        document.addEventListener('dragleave', (event) => {
+            // 当拖动元素离开可放置目标节点，重置其背景
+            if (event.target.className === 'dropzone') {
+                event.target.style.background = ''
+            }
+        }, false)
+        document.addEventListener('dragover', (event) => {
+            // 默认无法将数据或元素放置到其它元素
+            event.preventDefault()
+        }, false)
+        document.addEventListener('drop', (event) => {
+            // 阻止默认动作，如打开一些元素的链接
+            event.preventDefault()
+            // 将拖动的元素放到所选择的目标节点中
+            if (event.target.className === 'dropzone') {
+                event.target.style.background = ''
+                draggedEle.parentNode.removeChild(draggedEle)
+                event.target.appendChild(draggedEle)
+            }
+        }, false)
+    </script>
+</body>
+</html>

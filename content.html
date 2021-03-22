@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .p1::after {
+            content: '\02691';
+            color: red;
+        }
+        .p2::after {
+            content: attr(data-content);
+            color: red;
+        }
+        .p3:empty::after {
+            content: attr(href);
+        }
+        ul {
+            list-style: none;
+        }
+        ul.p4 {
+            display: flex;
+        }
+        ul.p4 li {
+            margin-right: 5px;
+        }
+        ul.p4 li:not(:last-child)::after {
+            content: '\276D';
+            margin-left: 5px;
+        }
+        ul.p5 {
+            display: flex;
+        }
+        ul.p5 li:not(:last-child)::after {
+            content: '、';
+        }
+        .progress {
+            width: 400px;
+            height: 17px;
+            margin: 5px;
+            font-size: 12px;
+            color: #fff;
+            background-color: #f1f1f1;
+        }
+        .progress::before {
+            counter-reset: percent var(--percent);
+            content: counter(percent)'%';
+
+            box-sizing: border-box;
+            display: inline-block;
+            width: calc(100% * var(--percent) / 100);
+            height: 100%;
+            padding-right: 5px;
+            text-align: right;
+            background-color: #2486ff;
+            /* transition: width 1s ease; */
+            animation: progress 1s ease forwards;
+        }
+        @keyframes progress {
+            from {
+                width: 0
+            }
+            to {
+                width: calc(100% * var(--percent) / 100);
+            }
+        }
+        [data-tooltip] {
+            position: relative;
+            width: 80px;
+            margin: 30px 0 30px 100px;
+        }
+        [data-tooltip]::after {
+            content: attr(data-tooltip);
+
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translate(-50%, 0);
+            white-space: nowrap;
+        }
+        [data-tooltip]:hover::after {
+            display: block;
+        }
+        .p6::after {
+            content: '.';
+            animation: loading 2s ease infinite;
+        }
+        @keyframes loading {
+            33% {
+                content: '..';
+            }
+            66% {
+                content: '...';
+            }
+        }
+        .no-more::before {
+            content: '——';
+            margin-right: 10px;
+        }
+        .no-more::after {
+            content: '——';
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <p class="p1"></p>
+    <p class="p2" data-content="我是文字内容"></p>
+    <a class="p3" href="https://juejin.im/user/587e1822128fe1005706db1c"></a><br>
+    <a class="p3" href="https://juejin.im/user/587e1822128fe1005706db1c">掘金链接</a>
+    <ul class="p4">
+        <li>首页</li>
+        <li>商品</li>
+        <li>详情</li>
+    </ul>
+    <ul class="p5">
+        <li>波霸奶茶</li>
+        <li>烤奶</li>
+        <li>咖啡</li>
+    </ul>
+    <div class="progress" style="--percent: 14;"></div>
+    <div class="progress" style="--percent: 41;"></div>
+    <div class="progress" style="--percent: 100;"></div>
+    <button data-tooltip="我是一段提示">按钮</button>
+    <p class="p6">加载中</p>
+    <div class="no-more">无更多数据</div>
+</body>
+</html>

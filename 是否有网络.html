@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        if (Object.prototype.toString.call(navigator.onLine) === '[object Boolean]') {
+            networkReachable()
+        } else {
+            serverReachable()
+        }
+
+        function serverReachable () {
+            const xhr = new XMLHttpRequest()
+            xhr.open('HEAD', `//${location.hostname}?random=${new Date().getTime()}`, false)
+            xhr.send()
+            return xhr.status >= 200 && xhr.status <300 || xhr.status === 304
+        }
+
+        function networkReachable () {
+            return navigator.onLine
+        }
+    </script>
+</body>
+</html>

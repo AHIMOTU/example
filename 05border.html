@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 20px auto;
+        }
+        .item1 {
+            border-top: 1px solid;
+        }
+        .item2 {
+            position: relative;
+        }
+        .item2::before {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 1px;
+            background-color: #000;
+            transform: scaleY(.5);
+        }
+        .item3 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+        .item3::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            border: 1px solid;
+            transform-origin: 0 0;
+            transform: scale(.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="item1">说说</div>
+    <div class="item2">啊啊</div>
+    <div class="item3"></div>
+</body>
+</html>

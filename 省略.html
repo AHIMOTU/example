@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .demo {
+            width: 200px;
+            margin-top: 20px;
+            border: 1px solid;
+            /* user-select: none; */
+        }
+        .demo1 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .demo2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <span>空白测试</span>
+    <span>空白测试</span>
+    <span>空白测试</span><!--
+    --><span>空白测试</span>
+    <h1>单行文本溢出</h1>
+    <div class="demo demo1">这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的文本</div>
+    <div class="demo demo2">这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的文本</div>
+    <div class="demo demo3">这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的文本</div>
+    <script type="text/javascript">
+        const lines = 2
+
+        const ele = document.getElementsByClassName('demo3')[0]
+        let content = ele.innerText
+        const baseWidth = +window.getComputedStyle(ele).width.slice(0, -2)
+        const baseFontSize = +window.getComputedStyle(ele).fontSize.slice(0, -2)
+        const perLineWords = Math.floor(baseWidth / baseFontSize)
+
+        content = content.slice(0, perLineWords * lines - 3).concat('...')
+        ele.innerHTML = content
+    </script>
+</body>
+</html>

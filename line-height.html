@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       .parent1{
+            font-size:14px;
+            line-height: 1.5em;
+            background: #999;
+            padding:10px
+        }
+        .parent2{
+            font-size:14px;
+            line-height: 1.5;
+            background: #999;
+            padding:10px
+        }
+        .child{
+            font-size:26px;
+            background: #ccc;
+        }
+        .parent3 {
+            margin-top: 20px;
+            background-color: blueviolet;
+        }
+        .parent3 img {
+            /* display: block; */
+        }
+        .parent3 span {
+            display: inline-block;
+            background-color: #fff;
+            /* vertical-align: bottom; */
+        }
+        .parent4 {
+            margin-top: 20px;
+            height: 280px;
+            /* font-size: 0; */
+            background-color: blueviolet;
+        }
+        .parent4 img {
+            width: 300px;
+            height: 260px;
+            /* vertical-align: middle; */
+        }
+        .parent4 span {
+            font-size: 32px;
+            line-height: 0;
+            background-color: #fff;
+        }
+        .parent5 {
+
+        }
+        .parent5 .dib-baseline {
+            display: inline-block; width: 150px; height: 150px;
+            border: 1px solid #cad5eb; background-color: #f0f3f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent1">
+        <div class="child">line-height: 1.5em;</div>
+    </div>
+    <br><br>
+    <div class="parent2">
+        <div class="child">line-height: 1.5;</div>
+    </div>
+    <div class="parent3">
+        <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3252521864,872614242&fm=26&gp=0.jpg" alt="">
+        <span>x</span>
+    </div>
+    <div class="parent4">
+        <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3252521864,872614242&fm=26&gp=0.jpg" alt="">
+        <span>x</span>
+    </div>
+    <div class="parent5">
+        <span class="dib-baseline"></span>
+        <span class="dib-baseline" style="line-height: 0;">x-baseline</span>
+    </div>
+</body>
+</html>

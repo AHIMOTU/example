@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="refresh" content="0;url=https://baidu.com/"> -->
+    <title>选项卡</title>
+    <style>
+        .tabs {
+            border: 1px solid #dcdfe6;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .12);
+        }
+        .tabs__header {
+            border-bottom: 1px solid #e4e7ed;
+            background-color: #f5f7fa;
+        }
+        .tabs__nav-wrap {
+            /* 设置BFC，避免高度塌陷 */
+            overflow: hidden;
+            /* 隐藏border-bottom */
+            margin-bottom: -1px;
+        }
+        .tabs__nav {
+            float: left;
+            /* 消除inline-block带来的标签与标签之间的空白 */
+            font-size: 0;
+        }
+        .tabs__item {
+            display: inline-block;
+            line-height: 40px;
+            padding: 0 20px;
+            border: 1px solid transparent;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .tabs__item:hover {
+            color: #409eff;
+        }
+        .tabs__item.is-active {
+            border-left-color: #dcdfe6;
+            border-right-color: #dcdfe6;
+            color: #409eff;
+            background-color: #fff;
+        }
+        .tabs__content {
+            padding: 15px;
+        }
+        .tab-pane {
+            display: none;
+        }
+        .tab-pane.is-active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="tabs">
+        <div class="tabs__header">
+            <div class="tabs__nav-wrap">
+                <div class="tabs__nav">
+                    <div class="tabs__item">用户管理</div>
+                    <div class="tabs__item is-active">配置管理</div>
+                    <div class="tabs__item">角色管理</div>
+                    <div class="tabs__item">定时任务补偿</div>
+                </div>
+            </div>
+        </div>
+        <div class="tabs__content">
+            <div class="tab-pane">用户管理</div>
+            <div class="tab-pane is-active">配置管理</div>
+            <div class="tab-pane">角色管理</div>
+            <div class="tab-pane">定时任务补偿</div>
+        </div>
+    </div>
+    <script>
+        let tabsNavDOM = document.querySelector('.tabs__nav')
+        tabsNavDOM.onclick = e => {
+            const tabsItemDOMS = document.querySelectorAll('.tabs__nav .tabs__item')
+            const tabPaneDOMS = document.querySelectorAll('.tabs__content .tab-pane')
+            const index = Array.prototype.indexOf.call(tabsItemDOMS, e.target)
+            
+            tabsItemDOMS.forEach(dom => {
+                dom.classList.remove('is-active')
+            })
+            tabPaneDOMS.forEach(dom => {
+                dom.classList.remove('is-active')
+            })
+            tabsItemDOMS[index].classList.add('is-active')
+            tabPaneDOMS[index].classList.add('is-active')
+        }
+    </script>
+</body>
+</html>

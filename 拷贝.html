@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <script>
+    window.onload = function () {
+      let arr = [{ old: 'old' }, 1, true, null, undefined, function () {}, {
+        func: function () {}
+      }]
+      // let new_arr = arr.concat()
+      // let new_arr = arr.slice()
+      let new_arr = JSON.parse(JSON.stringify(arr))
+      new_arr[0].old = 'oolldd'
+      console.log(new_arr)
+      console.log(arr)
+    }
+  </script>
+</body>
+</html>

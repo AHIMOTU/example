@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>圣杯和双飞翼</title>
+    <style>
+        #wrap1 {
+            height: 100px;
+            padding: 0 180px 0 220px;
+        }
+        #wrap1 .center {
+            float: left;
+            width: 100%;
+            height: 100%;
+            background-color: #ff0080;
+        }
+        #wrap1 .left {
+            position: relative;
+            left: -220px;
+            float: left;
+            width: 220px;
+            height: 100%;
+            margin-left: -100%;
+            background-color: #4ac212;
+        }
+        #wrap1 .right {
+            position: relative;
+            left: 180px;
+            float: left;
+            width: 180px;
+            height: 100%;
+            margin-left: -180px;
+            background-color: #0c9;
+        }
+        #wrap2 {
+            height: 100px;
+        }
+        #wrap2 .center {
+            float: left;
+            width: 100%;
+            height: 100%;
+        }
+        #wrap2 .center .content {
+            height: 100%;
+            margin: 0 180px 0 220px;
+            background-color: #ff0080;
+        }
+        #wrap2 .left {
+            float: left;
+            width: 220px;
+            height: 100%;
+            margin-left: -100%;
+            background-color: #4ac212;
+        }
+        #wrap2 .right {
+            float: left;
+            width: 180px;
+            height: 100%;
+            margin-left: -180px;
+            background-color: #0c9;
+        }
+        #wrap2 .footer {
+            clear: both;
+            height: 50px;
+            background-color: #fffb00;
+        }
+        #wrap3 {
+            display: flex;
+            height: 100px;
+        }
+        #wrap3 .center {
+            flex: 1;
+            order: 2;
+            background-color: #ff0080;
+        }
+        #wrap3 .left {
+            order: 1;
+            width: 220px;
+            background-color: #4ac212;
+        }
+        #wrap3 .right {
+            order: 3;
+            width: 180px;
+            background-color: #0c9;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://www.baidu.com">放大发</a>
+    <a href="https://www.baidu.com" target="_parent">额我热</a>
+    <a href="https://www.baidu.com" target="_top">额我热</a>
+    <h1>圣杯</h1>
+    <div id="wrap1">
+        <div class="center">看见我了吗</div>
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+    <h1>双飞翼</h1>
+    <div id="wrap2">
+        <div class="center">
+            <div class="content">看见我了吗</div>
+        </div>
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="footer">footer</div>
+    </div>
+    <h1>flex圣杯</h1>
+    <div id="wrap3">
+        <div class="center">看见我了吗</div>
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+    <script>window.opener.location.href="https://www.baidu.com"</script>
+</body>
+</html>

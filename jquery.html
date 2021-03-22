@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/layer/3.1.1/layer.js"></script>
+</head>
+<body>
+    <div id="wrap" style="display: block ;">
+        <p><input id="c1" type="checkbox" name="vehicle" value="Bike" readonly="readonly" />anti</p>
+        <p><input id="c2" type="checkbox" name="vehicle" value="Car" checked="checked" />ip</p>
+    </div>
+    <div><input id="btn" type="submit" value="toggle" /></div>
+    <script>
+        $('#btn').click(function () {
+            const status = $('#wrap').css('display')
+            $('#wrap').css('display', status === 'none' ? 'block' : 'none')
+        })
+        $("#c1").prop('checked', true)
+        $("#c2").prop('checked', false)
+
+        $("#c1").on('click', function (e) {
+            e.preventDefault()
+            $("#c1").prop('checked', $("#c1").prop('checked'))
+            // const target = !$("#c1").prop('checked')
+            // console.log(target);
+            // preventLayer('anti', target)
+            // this.checked = !this.checked
+            // preventLayer2('anti', !this.checked)
+        })
+        $("#c2").on('click', function () {
+            if (this.checked) {
+                preventLayer('ip')
+            }
+            this.checked = !this.checked
+        })
+        function preventLayer(type) {
+            layer.open({
+                content: type,
+                btn: ['去开启', '取消'],
+                yes: function(index, layero){
+                    window.open('https://www.baidu.com')
+                }
+            })
+        }
+        function preventLayer2(type, target) {
+            const name = target ? '开启' : '关闭'
+            layer.open({
+                content: type,
+                btn: [`确认${name}`, '取消'],
+                yes: function(index, layero){
+                    $(`#${type === 'anti' ? 'c1' : 'c2'}`).prop('checked', target)
+                    // _this.checked = !_this.checked
+                    layer.close(index)
+                }
+            })
+        }
+    </script>
+</body>
+</html>

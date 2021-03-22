@@ -1,0 +1,100 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+        }
+        body > div {
+            flex: 1 0 33.3%;
+            overflow: auto;
+        }
+        .content {
+            /* height: 100px; */
+            background-color: blueviolet;
+        }
+        .footer {
+            height: 50px;
+            background-color: darkturquoise;
+        }
+        #wrapper1 {
+            height: 100%;
+        }
+        #wrapper1 .main {
+            box-sizing: border-box;
+            min-height: 100%;
+            padding-bottom: 50px;
+        }
+        #wrapper1 .footer {
+            margin-top: -50px;
+        }
+        #wrapper2 .main {
+            box-sizing: border-box;
+            min-height: calc(100% - 50px);
+        }
+        #wrapper3 {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+        #wrapper3 .main {
+            flex: 1;
+        }
+        #wrapper3 .footer {
+            flex-shrink: 0;
+        }
+        .fix-area {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            width: 80px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 80px;
+            cursor: pointer;
+            background-color: brown;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper1" class="wrap">
+        <div class="main">
+            <div class="content">1</div>
+        </div>
+        <div class="footer"></div>
+    </div>
+    <div id="wrapper2" class="wrap">
+        <div class="main">
+            <div class="content">2</div>
+        </div>
+        <div class="footer"></div>
+    </div>
+    <div id="wrapper3" class="wrap">
+        <div class="main">
+            <div class="content">3</div>
+        </div>
+        <div class="footer"></div>
+    </div>
+    <div class="fix-area">添加内容</div>
+    <script>
+        const fixAreaEle = document.getElementsByClassName('fix-area')[0]
+        const contentEles = document.getElementsByClassName('content')
+        
+        fixAreaEle.addEventListener('click', () => {
+            Array.prototype.forEach.call(contentEles, ele => {
+                const addNode = document.createElement('p')
+                addNode.innerHTML = '内容'
+                addNode.style.lineHeight = '100px'
+                ele.appendChild(addNode) // 注意：如果文档树中已经存在了newChild，它将从文档树中删除，然后重新插入它的新位置
+            })
+        })
+    </script>
+</body>
+</html>

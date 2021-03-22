@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    html,body,div,iframe {
+      margin: 0;
+      padding: 0;
+    }
+    html,body {
+      height: 100%;
+    }
+    #wrap {
+      display: flex;
+      height: 100%;
+    }
+    .iframe {
+      background: chartreuse;
+    }
+    .left {
+      width: 300px;
+      height: 100%;
+    }
+    .right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .top {
+      height: 200px;
+    }
+    .bottom {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <iframe class="iframe left"></iframe>
+    <div class="right">
+      <iframe class="iframe top"></iframe>
+      <iframe class="iframe bottom"></iframe>
+    </div>
+  </div>
+</body>
+</html>
